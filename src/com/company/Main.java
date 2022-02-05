@@ -14,29 +14,29 @@ public class Main {
         return users;
     }
 
-    public static User getUserByLoginAndPassword(String login, String password, User[] users){
+    public static User getUserByLoginAndPassword(String login, String password, User[] users) {
         Boolean userFound = false;
-        int idFound=0;
-        for (int findId = 0; findId < users.length; findId++){
+        int idFound = 0;
+        for (int findId = 0; findId < users.length; findId++) {
             if ((users[findId].getLogin().equals(login)) && (users[findId].getPassword().equals(password))) {
                 idFound = findId;
                 userFound = true;
             }
         }
-        if(!userFound) {
+        if (!userFound) {
             throw new UserNotFoundException(login);
         }
 
-            return users[idFound];
+        return users[idFound];
     }
 
-    public static void validateUser(User user) throws AccessDeniedException{
-        if (user.getAge()<18) {
+    public static void validateUser(User user) throws AccessDeniedException {
+        if (user.getAge() < 18) {
             throw new AccessDeniedException("Доступ к сервису невозможен, контент 18+");
         }
     }
 
-    public static void main(String[] args) throws UserNotFoundException ,AccessDeniedException {
+    public static void main(String[] args) throws UserNotFoundException, AccessDeniedException {
 
         User[] users = getUsers();
         Scanner scanner = new Scanner(System.in);
@@ -50,16 +50,13 @@ public class Main {
             User user = getUserByLoginAndPassword(login, pass, users);
             validateUser(user);
             System.out.println("Досту предоставлен!");
-        } catch (UserNotFoundException RuntimeException){
+        } catch (UserNotFoundException RuntimeException) {
             System.out.println("Нет доступа");
-        } catch (AccessDeniedException RuntimeException){
+        } catch (AccessDeniedException RuntimeException) {
             System.out.println("Нет доступа, контент 18+");
         } finally {
             scanner.close();
         }
-
-
-
 
 
     }
