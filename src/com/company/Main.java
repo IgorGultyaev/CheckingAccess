@@ -45,7 +45,6 @@ public class Main {
         System.out.print("Введите логин: ");
         String pass = scanner.nextLine();
 
-
         try {
             User user = getUserByLoginAndPassword(login, pass, users);
             validateUser(user);
